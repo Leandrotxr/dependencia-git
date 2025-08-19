@@ -18,6 +18,7 @@ public class Main {
         playlist.add(new Musica("Hotel California", "6:30"));
         playlist.add(new Musica("Smells Like Teen Spirit", "5:01"));
         playlist.add(new Musica("Scar Tissue", "3:35"));
+        playlist.add(new Musica("Stairway to Heaven", "8:00"));
 
         // Criar objeto Gson (com indentação bonita)
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
