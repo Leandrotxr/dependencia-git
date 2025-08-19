@@ -1,3 +1,1 @@
 # depencencia-git
-
-cruzeiro
