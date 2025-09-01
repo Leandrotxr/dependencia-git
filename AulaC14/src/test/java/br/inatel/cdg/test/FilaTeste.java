@@ -1,6 +1,6 @@
 package br.inatel.cdg.test;
 
-import classes.Fila;
+import filas.Fila;
 import org.junit.Test;
 
 import java.util.NoSuchElementException;
@@ -28,7 +28,7 @@ public class FilaTeste {
         Fila<Integer> filaInteiros = new Fila<>();
         filaInteiros.enfileirar(21);
         filaInteiros.enfileirar(22);
-        assertEquals(22, filaInteiros.getElemento(1).intValue());
+        assertEquals(22, filaInteiros.getMusica(1).intValue());
     }
 
     @Test
