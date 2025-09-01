@@ -5,26 +5,31 @@ import com.google.gson.GsonBuilder;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
+import filas.Fila;
 import musicas.Musica;
 
 public class Main {
     public static void main(String[] args) {
         // Lista de músicas
-        List<Musica> playlist = new ArrayList<>();
-        playlist.add(new Musica("Bohemian Rhapsody", "5:55"));
-        playlist.add(new Musica("Hotel California", "6:30"));
-        playlist.add(new Musica("Smells Like Teen Spirit", "5:01"));
-        playlist.add(new Musica("Scar Tissue", "3:35"));
-        playlist.add(new Musica("Stairway to Heaven", "8:00"));
+        Fila<Musica> fila = new Fila<>();
+        Musica m1 = new Musica("Bohemian Rhapsody", "5:55");
+        Musica m2 = new Musica("Hotel California", "6:30");
+        Musica m3 = new Musica("Smells Like Teen Spirit", "5:01");
+        Musica m4 = new Musica("Scar Tissue", "3:35");
+        Musica m5 = new Musica("Stairway to Heaven", "8:00");
+
+        fila.enfileirar(m1);
+        fila.enfileirar(m2);
+        fila.enfileirar(m3);
+        fila.enfileirar(m4);
+        fila.enfileirar(m5);
 
         // Criar objeto Gson (com indentação bonita)
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         // Converter lista para JSON
-        String json = gson.toJson(playlist);
+        String json = gson.toJson(fila);
 
         // Salvar em arquivo
         try (FileWriter writer = new FileWriter("musicas.json")) {
