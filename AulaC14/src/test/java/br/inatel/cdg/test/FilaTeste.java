@@ -1,6 +1,7 @@
 package br.inatel.cdg.test;
 
 import filas.Fila;
+import musicas.Musica;
 import org.junit.Test;
 
 import java.util.NoSuchElementException;
@@ -12,47 +13,54 @@ public class FilaTeste {
 
     @Test
     public void testeFilaSize(){
-        Fila<Integer> filaInteiros = new Fila<>();
-        filaInteiros.enfileirar(21);
-        assertEquals(1, filaInteiros.size());
+        Fila<Musica> fila = new Fila<>();
+        Musica m1 = new Musica("Bohemian Rhapsody", "5:55");
+        Musica m2 = new Musica("Hotel California", "6:30");
+        fila.enfileirar(m1);
+        fila.enfileirar(m2);
+        assertEquals(2, fila.size());
     }
 
     @Test
     public void testeFilaVazia(){
-        Fila<Integer> filaInteiros = new Fila<>();
-        assertTrue(filaInteiros.filaVazia());
+        Fila<Musica> fila = new Fila<>();
+        assertTrue(fila.filaVazia());
     }
 
     @Test
     public void testeEnfileirar(){
-        Fila<Integer> filaInteiros = new Fila<>();
-        filaInteiros.enfileirar(21);
-        filaInteiros.enfileirar(22);
-        assertEquals(22, filaInteiros.getMusica(1).intValue());
+        Fila<Musica> fila = new Fila<>();
+        Musica m1 = new Musica("Bohemian Rhapsody", "5:55");
+        Musica m2 = new Musica("Hotel California", "6:30");
+        fila.enfileirar(m1);
+        fila.enfileirar(m2);
+        assertEquals(m2, fila.getMusica(1));
     }
 
     @Test
     public void testeRemoverFila(){
-        Fila<Integer> filaInteiros = new Fila<>();
-        filaInteiros.enfileirar(21);
-        filaInteiros.enfileirar(23);
-        filaInteiros.removerFila();
-        assertEquals(1, filaInteiros.size());
+        Fila<Musica> fila = new Fila<>();
+        Musica m1 = new Musica("Bohemian Rhapsody", "5:55");
+        Musica m2 = new Musica("Hotel California", "6:30");
+        fila.enfileirar(m1);
+        fila.enfileirar(m2);
+        fila.removerFila();
+        assertEquals(1, fila.size());
     }
 
     @Test(expected = NoSuchElementException.class)
     public void testeFilaRemoverFilaException(){
-        Fila<Integer> filaInteiros = new Fila<>();
-        filaInteiros.removerFila();
+        Fila<Musica> fila = new Fila<>();
+        fila.removerFila();
     }
 
     @Test
     public void testeFilaRetorno(){
-        Fila<Integer> filaInteiros = new Fila<>();
-        int valor = 13;
-        filaInteiros.enfileirar(valor);
-        int retorno = filaInteiros.removerFila();
+        Fila<Musica> fila = new Fila<>();
+        Musica m1 = new Musica("Bohemian Rhapsody", "5:55");
+        fila.enfileirar(m1);
+        Musica retorno = fila.removerFila();
 
-        assertEquals(valor, retorno);
+        assertEquals(m1, retorno);
     }
 }
