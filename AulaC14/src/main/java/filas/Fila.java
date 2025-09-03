@@ -26,7 +26,7 @@ public class Fila<Musica> {
         if (filaVazia()) {
             throw new NoSuchElementException();
         }
-        return playlist.remove(0);
+        return playlist.remove(1);
     }
 
     public Musica getMusica(int index) throws NoSuchElementException {
