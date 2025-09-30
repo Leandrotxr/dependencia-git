@@ -25,7 +25,7 @@ jobs:
 
       - name: Rodar testes unitários
         run: |
-          cd aula_2508
+          cd AulaC14
           mvn test
 
       - name: Upload relatório de testes
@@ -33,7 +33,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-report
-          path: aula_2508/target/surefire-reports/
+          path: AulaC14/target/surefire-reports/
 
   # Job 2 - Build/Empacotamento
   build:
@@ -50,14 +50,14 @@ jobs:
 
       - name: Compilar e empacotar
         run: |
-          cd aula_2508
+          cd AulaC14
           mvn package -DskipTests
 
       - name: Upload artefato da build
         uses: actions/upload-artifact@v4
         with:
           name: java-package
-          path: aula_2508/target/*.jar
+          path: AulaC14/target/*.jar
 
   # Job 3 - Notificação por e-mail (Outlook)
   notify:
