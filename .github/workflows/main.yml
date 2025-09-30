@@ -1,0 +1,76 @@
+name: Java CI/CD Pipeline
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+env:
+  EMAIL_TO: ${{ secrets.EMAIL_TO }}
+
+jobs:
+  # Job 1 - Testes
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Instalar Maven e JDK
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y maven openjdk-17-jdk
+
+      - name: Rodar testes unitários
+        run: |
+          cd AulaC14
+          mvn test
+
+      - name: Upload relatório de testes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: AulaC14/target/surefire-reports/
+
+  # Job 2 - Build/Empacotamento
+  build:
+    runs-on: ubuntu-latest
+    needs: tests
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Instalar Maven e JDK
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y maven openjdk-17-jdk
+
+      - name: Compilar e empacotar
+        run: |
+          cd AulaC14
+          mvn package -DskipTests
+
+      - name: Upload artefato da build
+        uses: actions/upload-artifact@v4
+        with:
+          name: java-package
+          path: AulaC14/target/*.jar
+
+  # Job 3 - Notificação por e-mail (Outlook)
+  notify:
+    runs-on: ubuntu-latest
+    needs: [tests, build]
+    steps:
+      - name: Criar script de notificação
+        run: |
+          echo '#!/bin/bash' > notify.sh
+          echo 'echo "Pipeline executado com sucesso!" | mail -s "Status do Pipeline" $EMAIL_TO' >> notify.sh
+          chmod +x notify.sh
+      - name: Instalar utilitário de e-mail
+        run: sudo apt-get update && sudo apt-get install -y mailutils
+
+      - name: Executar notificação
+        run: ./notify.sh
