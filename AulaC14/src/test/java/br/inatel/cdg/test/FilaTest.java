@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class FilaTeste {
+public class FilaTest {
 
     @Test
     public void testeFilaSize(){
