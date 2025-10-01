@@ -5,9 +5,11 @@ import musicas.Musica;
 import org.junit.Test;
 
 import java.util.NoSuchElementException;
+import static org.mockito.Mockito.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
 
 public class FilaTest {
 
@@ -28,13 +30,16 @@ public class FilaTest {
     }
 
     @Test
-    public void testeEnfileirar(){
+    public void deveAdicionarMockDeMusicaNaFila() {
         Fila<Musica> fila = new Fila<>();
-        Musica m1 = new Musica("Bohemian Rhapsody", "5:55");
-        Musica m2 = new Musica("Hotel California", "6:30");
-        fila.enfileirar(m1);
-        fila.enfileirar(m2);
-        assertEquals(m2, fila.getMusica(1));
+
+        Musica musicaMock = mock(Musica.class);
+        when(musicaMock.toString()).thenReturn("Mocked Music");
+
+        fila.enfileirar(musicaMock);
+
+        assertEquals(musicaMock, fila.getMusica(0));
+        assertEquals("Mocked Music", fila.getMusica(0).toString());
     }
 
     @Test

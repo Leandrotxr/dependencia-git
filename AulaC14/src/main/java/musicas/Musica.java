@@ -8,4 +8,12 @@ public class Musica {
         this.nome = nome;
         this.duracao = duracao;
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getDuracao() {
+        return duracao;
+    }
 }
